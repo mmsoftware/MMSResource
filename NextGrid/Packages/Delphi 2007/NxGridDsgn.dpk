@@ -1,0 +1,44 @@
+package NxGridDsgn;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'BergSoft | NextGrid Component (Design)'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  designide,
+  xmlrtl,
+  vclactnband,
+  vclx,
+  NxGridRun,
+  NxCommonRun;
+
+contains
+  NxGridReg in '..\..\Sources\Next Grid\NxGridReg.pas',
+  NxColumnEditor in '..\..\Sources\Next Grid\NxColumnEditor.pas',
+  NxSlidesEditor in '..\..\Sources\Next Grid\NxSlidesEditor.pas',
+  NxCaptionDlg in '..\..\Sources\Next Grid\NxCaptionDlg.pas';
+
+end.

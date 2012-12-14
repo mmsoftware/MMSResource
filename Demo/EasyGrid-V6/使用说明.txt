@@ -1,0 +1,350 @@
+安装时请按照以下序列：
+  
+  Component->Install Packges-> <Add> 选择Discovery.bpl
+  Options->Library->Search Path 中加入搜索路径。
+
+
+EasyGrid 使用说明：
+
+  一、单元格属性；
+      // **************************************************
+      // EasyGrid 的 Cells[i,j] 属性不同于 StringGrid。
+      // StringGrid 的 Cells 仅仅是一个字符串，而 EasyGrid
+      // 的 Cells 可以存储丰富的数据类型。
+      //
+      // 使用范例：
+      //     EasyGrid1.Cells[1,2].Color := clRed;
+      // 将第一列第二行的一个单元格背景置为红色。
+      //
+      // !!! 需要注意的是：
+      //     上述语法不会导致网格自动刷新（即结果不会马上反映），因为上述语法
+      // 实际上是对内存地址直接写入，这样做的好处在于，如果大批量写入数据，这
+      // 是最快的方法，不会出现慢镜头式的现象。
+      //     用 EasyGrid1.Colors[1,2] := clRed; 可以实现同样效果并实时刷新，
+      // 但大批量写入数据时速度较慢。
+      //     对大批量写入数据的处理一般需要使用 AutoUpdate 属性：
+      //       EasyGrid1.AutoUpdate := False;
+      //       ... 大批量写入数据
+      //       EasyGrid1.AutoUpdate := True;
+      //     AutoUpdate 属性的使用类似于一个与 DbGrid 关联的 DataSource 控件，
+      // 当 DataSource 内容改变时，需要把 DataSource 的 Enabled 属性置为 False。
+      // 以防止 DbGrid 出现慢镜头式的现象。
+      // **************************************************
+
+      // **************************************************
+      // 单元格属性说明如下：
+      TCellInfo = record
+        DataStyle : TDataStyle;  // 数据格式
+          // 可用数据格式为：
+          // TDataStyle = (dsText,dsNumber,dsDate,dsTime,dsFormula);
+        AlignMode : TAlignMode;  // 对齐方式
+          // 可用对齐方式为：
+          // TAlignMode = (taTopLeft, taTop, taTopRight,
+          //               taLeft, taCenter, taRight,
+          //               taBottomLeft, taBottom, taBottomRight);
+        ReadOnly : Boolean;      // 单元格是否可编辑
+        AutoWordBreak : Boolean; // 文字自动折行
+        ShowForeText : Boolean;  // 显示控制(Default True)
+          // 说明：每个单元格允许存放两个字符串：
+          //       ForeText 与 BackText
+          // ShowForeText 属性用于指定该网格显示哪一个字符串
+        DrawTop : Boolean;       // 画顶线
+        DrawLeft : Boolean;      // 画左线
+        DrawBottom : Boolean;    // 画底线
+        DrawRight : Boolean;     // 画右线
+
+        // 下面七个属性对于 DataStyle 为 dsNumber （数值型）的网格有效
+        AllowNegative : Boolean; // 是否允许输入负数
+        TrailingZero : Boolean;  // 是否在小数后面补 0
+        ZeroNull : Boolean;      // 输入数值 0 时是否当作空串处理
+        ThousandSep : Boolean;   // 是否有千分号
+        MaxLength : Integer;     // 最大编辑长度
+        IntLength : Integer;     // 整数部分最大长度
+        DecLength : Integer;     // 小数部分最大长度
+
+        LineWidth : Integer;     // 边框线宽
+        PenStyle : TPenStyle;    // 线形(TPenStyle 为Delphi定义类型)
+
+        // Number 用于存储额外的数据，甚至可以用 Pointer()
+        // 强制成32位结构指针，使得网格理论上可以挂接任意类型的数据
+        Number : Integer;        // 存储数值
+
+        Color : TColor;          // 网格背景颜色
+
+        FontSize: Integer;       // 字体大小
+        FontColor: TColor;       // 字体颜色
+        FontStyle: TFontStyles;  // 字体风格
+        FontName : string;       // 字体名字
+        ForeText : string;       // 前台 Text
+        BackText : string;       // 后台 Text
+      end;
+      PCellInfo = ^TCellInfo;
+
+  二、属性：（仅列出与DELPHI StringGrid 不同的部分）
+     1、列在面板中的属性
+        AlwaysDrawFocus   // 是否在失去焦点时仍然显示黑色的粗框
+	AutoUpdate        // 该属性很重要，说明见上
+	CellAlignMode     // 设置所有网格的默认属性（下同）
+	CellAllowNegative
+	CellAutoWordBreak
+	CellColor
+	CellDataStyle
+	CellDecLength
+	CellFontColor
+	CellFontSize
+	CellFontStyle
+	CellIntLength
+	CellLineWidth
+	CellMaxLength
+	CellPenStyle
+	CellReadOnly
+	CellShowForeText
+	CellThousandSep
+	CellTrailingZero
+	CellZeroNull
+	ClientLineColor   // 非固定区线条颜色
+	FixedLineColor    // 固定区线条颜色
+	ClientSizeable    // 非固定区是否允许用鼠标拖曳改变行高列宽
+	ColCount          // 列数
+        RowCount          // 行数
+	Color             // 网格之外的背景颜色
+	DefaultColWidth   // 缺省列宽
+	DefaultRowHeight  // 缺省行高
+	FixedCols         // 固定列数目（水平滚动时保持显示的列）
+	FixedRows         // 固定行数目（垂直滚动时保持显示的行，一般用作表头）
+  	GridCanCopyMove   // 是否允许交互式拖曳网格（点击黑色粗框）
+	GridCanFill       // 是否允许交互式填充网格
+	GridLineWidth     // 整个网格线条宽度
+	HighLightColor    // 选中网格的背景颜色
+	HighLightTextColor// 选中网格的文本颜色
+	Option            // 其他属性（类似 StringGrid 的 Option）
+	  goFixedVertLine // 是否显示固定区竖直线
+	  goFixedHorzLine // 是否显示固定区水平线
+	  goVertLine      // 是否显示非固定区竖直线
+	  goHorzLine      // 是否显示非固定区水平线
+	  goRangeSelect   // 是否允许用鼠标进行范围选择（选择多个单元格）
+	  goDrawFocusSelected // 是否显示表示选中的单元格粗框
+	  goRowSizing     // 是否允许用鼠标改变行高
+	  goColSizing     // 是否允许用鼠标改变列宽
+	  goEditing       // 网格是否可编辑
+	  goTabs          // 是否允许用 TAB 键在列之间跳动
+	  goRowSelect     // 是否一次选中一行（浏览模式）
+ 	  goAlwaysShowEditor // 是否总是显示编辑器
+	  goThumbTracking // 滑动滚动条时是否同步滚动网格
+        ScrollBars        // （ssBoth, ssHorz, ssVert）
+        ShowColTitle      // 是否显示标题行（顶端标有A B C D的行）
+        ShowRowTitle      // 是否显示标题列（左边标有1 2 3 4的列）
+        TitleColor        // 标题区颜色
+	FocusedTitleColor // 选中行列的 Title 区颜色
+        ShowPopup         // 点击右键时是否显示属性设置菜单
+     2、没有列在面板中的属性
+        Canvas            // 画布属性
+        Col               // 当前列
+        Row;              // 当前行
+        ColWidths         // 列宽数组（如：ColWidths[1] := 100）
+        Aligns            // 对齐属性数组（如：Aligns[1,1] := taCenter）
+        ForeTexts         // 前台文本数组（如：ForeTexts[1,1] := 'Hello'）
+        BackTexts         // 后台文本数组（如：BackTexts[1,1] := 'Hello'）
+        Colors            // 颜色属性数组（如：Colors[1,1] := clRed）
+        Cells             // 说明见上
+        Selection         // 当前选择区域 (TRect)
+        RowHeights        // 类似 ColWidths
+        ColCanSizes       // 列允许改变宽度数组（如：ColCanSizes[1] := False）
+        RowCanSizes       // 行允许改变高度数组（如：RowCanSizes[1] := False）
+
+  三、方法
+        // 根据网格行列坐标计算网格的屏幕物理坐标(相对于 Grid 的左上角)
+        function CellRect(ACol, ARow: Longint): TRect;
+
+        // 计算物理坐标对应的网格的坐标
+        procedure MouseToCell(X, Y: Integer; var ACol, ARow: Longint);
+
+        // 强制更新 ARect 区域(Grid 坐标)
+        procedure InvalidateRect(ARect: TGridRect);
+
+        // 强制更新整个 Grid
+        procedure InvalidateGrid;
+
+        // 强制刷新一个 Cell ( Grid 坐标单位)
+        procedure InvalidateCell(ACol, ARow: Longint);
+
+        // 强制刷新一列 ( Grid 坐标单位)
+        procedure InvalidateCol(ACol: Longint);
+
+        // 强制刷新一行 ( Grid 坐标单位)
+        procedure InvalidateRow(ARow: Longint);
+
+        // 合并网格
+        procedure SetMerges(AMergeRect: TRect; WantPrompt: Boolean = False);
+
+        // 拆分网格
+        procedure DeleteMerges(AMergeRect: TRect);
+
+        // **********************************************
+        // 注意：ClearCells 仅仅清除文本
+        //       而 RestoreCells 会将网格的合并区拆散
+        //       并恢复网格颜色、对齐等所有属性为缺省状态
+        // **********************************************
+        // 把一个范围内的 Cells 恢复到缺省状态
+        procedure RestoreCells(DestRestoreRect: TRect);
+
+        // 清除一个范围内的 Cells 的文本
+        procedure ClearCells(DestClearRect: TRect);
+
+        // 拷贝一个范围内的 Cells 内容到剪贴板中
+        procedure CopyCells(DestCopyRect: TRect);
+
+        // 拷贝一个范围内的 Cells 内容到剪贴板中并执行 RestoreCells 操作
+        procedure CutCells(DestCutRect: TRect);
+
+        // 填充网格内容（相当于点击网格右下角的黑点的填充操作）
+        procedure FillCells(SrcRect: TRect; Offset: Integer; FillStyle: TFillStyle);
+
+        // 从剪贴板中粘贴 Cells 内容到一个范围内
+        procedure PasteCells(DestPasteCoord: TPoint);
+
+        // **********************************************
+        // 下述四个方法的 PropertyName 的可用参数如下：
+        // pnDataStyle, pnAlignMode, pnReadOnly,pnAutoWordBreak,
+        // pnShowForeText, pnDrawTop, pnDrawLeft, pnDrawRight, pnDrawBottom,
+        // pnAllowNegative, pnTrailingZero, pnZeroNull, pnThousandSep, pnMaxLength,
+        // pnIntLength, pnDecLength, pnLineWidth, pnPenStyle, pnNumber, pnColor,
+        // pnFontSize, pnFontColor, pnFontStyle, pnFontName,
+        // pnForeText, pnBackText
+        // 分别对应网格的各个属性。
+        // Value 参数应全部用 Pointer() 进行强制转换
+        // 例如：
+        //   SetRowProperty(1, pnColor, Pointer(clRed));
+        // 将把第一行的颜色设为红色。
+        //     通过这些方法以及属性数组（如：Colors, Aligns）对网格内容进行
+        // 改动时，如果不显式指定 AutoUpdate ，会自动刷新网格显示
+        // ***********************************************
+        // 设置某一行的 Cell 属性值
+        procedure SetColProperty(ColIndex: Integer; PropertyName: TPropertyName; Value: Pointer);
+
+        // 设置某一行的 Cell 属性值
+        procedure SetRowProperty(RowIndex: Integer; PropertyName: TPropertyName; Value: Pointer);
+
+        // 设置某个范围内的 Cell 属性值
+        procedure SetRangeProperty(Range: TRect; PropertyName: TPropertyName; Value: Pointer);
+
+        // 设置整个 Grid 的 Cell 属性值
+        procedure SetGridProperty(PropertyName: TPropertyName; Value: Pointer);
+        // **********************************************
+
+        // 清空剪贴板内容
+        procedure ClearClipBoard;
+
+        // 打开剪贴板
+        procedure OpenClipBoard;
+
+        // 关闭剪贴板
+        procedure CloseClipBoard;
+
+        // 判断剪贴板是否可用（是否有 EasyGrid 剪贴数据）
+        function ClipBoardAvailable: Boolean;
+
+        // 向右插入一个网格
+        procedure InsertCellRight(InsertRect: TRect);
+
+        // 向下插入一个网格
+        procedure InsertCellDown(InsertRect: TRect);
+
+        // 插入一行
+        procedure InsertRow(InsertRect: TRect);
+
+        // 插入一列
+        procedure InsertCol(InsertRect: TRect);
+
+        // 向右删除一个网格
+        procedure DeleteCellRight(DeleteRect: TRect);
+
+        // 向下删除一个网格
+        procedure DeleteCellDown(DeleteRect: TRect);
+
+        // 删除一行
+        procedure DeleteRow(DeleteRect: TRect);
+
+        // 删除一列
+        procedure DeleteCol(DeleteRect: TRect);
+
+        // 显示设置单元格属性窗口
+        procedure SetCellProp(DefaultPage: Integer = -1);
+
+        // 把 Grid 保存到文件中
+        procedure SaveToFile(FileName: string);
+
+        // 把 Grid 保存到文件流中
+        procedure SaveToStream(FileStream: TFileStream);
+
+        // 从文件中读出 Grid 内容
+        procedure LoadFromFile(FileName: string);
+
+        // 从文件流中读出 Grid 内容
+        procedure LoadFromStream(FileStream: TFileStream);
+
+        // 打印 Grid
+        procedure Print;
+
+        // 显示打印对话框
+        procedure PrintDialog;
+
+        // 显示打印预览窗口
+        procedure Preview;
+
+        // 显示打印机设置对话框
+        function PrinterSetup: Boolean;
+
+        // 显示页面设置对话框
+        procedure PageSetup;
+        
+  四、事件
+        此处只介绍最常用的 OnSelectCell 事件。其他与 StringGrid 类似。
+            OnSelectCell 在每次用户选中一个单元格时触发。值得注意的是：网格
+        此时的 Col, Row 属性尚未改变，仍然是上次的位置，OnSelectCell 的参数
+        给出了新的单元格的坐标。编程者仍然可以通过对 CanSelect 参数赋值来
+        指定是否允许选择该单元格。
+            OnSelectCell 事件最有用途的一个应用就是：可以在网格控件上放置
+        其他的控件。
+            通过 CellRect 方法可以得到新的单元格的物理坐标，然后动态在该处
+        Show 一个先前 Visible 属性为假的控件（如THintEdit），使得网格看上去
+        可以挂接感应框。
+
+PreviewBox 使用说明：
+
+  一、属性
+        PageCount // 页面个数
+        PageIndex // 当前页
+        Zoom      // 缩放比（10~100）
+  二、方法
+        NextPage   // 下一页
+        PriorPage  // 上一页
+        SwitchZoom // 放大/缩小
+  三、事件
+        此处只介绍 OnDrawPage 事件。
+          procedure(DrawCanvas: TCanvas; DrawRect: TRect;
+            PageIndex: Integer; Printing: Boolean);
+        参数：
+          DrawCanvas // 页面画布
+          DrawRect   // 可画区域
+          PageIndex  // 当前页面索引
+          Printing   // 打印标志（是否正在打印或预览）
+
+Calculator 使用说明：
+
+  一、属性
+          Associated    // 与之关联的 TCustomEdit 的子类控件（TEdit,THintEdit...）
+                        // 按下计算器的'√'键时计算结果将送到该 Edit 中
+          BackColor     // 背景颜色
+          ButtonSize    // 按钮大小（Ctrl + +/-）运行时可以调节
+          ButtonSpace   // 按钮间隔（Ctrl + Alt + +/-）运行时可以调节
+          ControlColor  // 不同按钮的颜色
+          NumberColor
+          OperatorColor
+          SpecialColor
+          Moveable      // 是否允许用鼠标拖曳
+          Transparent   // 是否透明（Ctrl + Alt + T）运行时可以调节
+          RoundCornered // 是否圆角（Ctrl + Alt + R）运行时可以调节
+          RoundRadius   // 圆角弧度
+          Font          // 按钮字体（Ctrl + Alt + Shift + +/-）运行时可以调节
+

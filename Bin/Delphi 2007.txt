@@ -1,0 +1,2 @@
+[LibraryPath]
+Path=$(MMS)\Source;$(MMS)\Source;$(MMS)\NextGrid\Sources;

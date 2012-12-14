@@ -1,0 +1,43 @@
+package NxCollectionRun;
+
+{$R *.res}
+{$R '..\..\Sources\Next Collection\NxCollection.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'BergSoft | NextCollection components package'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  NxCommonRun,
+  vclx;
+
+contains
+  NxCollection in '..\..\Sources\Next Collection\NxCollection.pas',
+  NxLinkMenu in '..\..\Sources\Next Collection\NxLinkMenu.pas',
+  NxPageControl in '..\..\Sources\Next Collection\NxPageControl.pas',
+  NxStatusBar in '..\..\Sources\Next Collection\NxStatusBar.pas',
+  NxToolBox in '..\..\Sources\Next Collection\NxToolBox.pas',
+  NxVistaCtrls in '..\..\Sources\Next Collection\NxVistaCtrls.pas';
+
+end.

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<PersonalityInfo>
+		<Option>
+			<Option Name="Personality">Default.Personality</Option>
+			<Option Name="ProjectType"></Option>
+			<Option Name="Version">1.0</Option>
+			<Option Name="GUID">{E8719F26-F853-4162-B2E2-376F46BCF255}</Option>
+		</Option>
+	</PersonalityInfo>
+	<Default.Personality>  <Projects>
+      <Projects Name="NxCommonRun.bpl">Delphi 2007\NxCommonRun.bdsproj</Projects>
+      <Projects Name="NxCommonDsgn.bpl">Delphi 2007\NxCommonDsgn.bdsproj</Projects>
+      <Projects Name="NxGridRun.bpl">Delphi 2007\NxGridRun.bdsproj</Projects>
+      <Projects Name="NxGridDsgn.bpl">Delphi 2007\NxGridDsgn.bdsproj</Projects>
+      <Projects Name="NxCollectionDsgn.bpl">Delphi 2007\NxCollectionDsgn.bdsproj</Projects>
+      <Projects Name="NxCollectionRun.bpl">Delphi 2007\NxCollectionRun.dproj</Projects>
+      <Projects Name="Targets">NxCommonRun.bpl NxCommonDsgn.bpl NxGridRun.bpl NxGridDsgn.bpl NxCollectionDsgn.bpl NxCollectionRun.bpl NxCollectionRun.bpl</Projects>
+    </Projects>
+    <Dependencies/>
+  </Default.Personality>
+	<StarTeamAssociation></StarTeamAssociation>
+	<StarTeamNonRelativeFiles></StarTeamNonRelativeFiles>
+</BorlandProject>

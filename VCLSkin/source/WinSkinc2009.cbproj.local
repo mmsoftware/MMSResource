@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2008/10/30 04:23:18.031.cbproj,D:\My Documents\RAD Studio\Projects\Package1.cbproj=D:\Myfile\Myskin\Source2.1\WinSkinc2009.cbproj</Transaction>
+    <Transaction>2008/10/30 04:32:36.953.bpi,D:\Program Files\CodeGear\RAD Studio\6.0\lib\release\designdgm.bpi=</Transaction>
+    <Transaction>2008/11/13 07:08:32.875.hpp,D:\MyFile\myskin\demo2\CB2009\WinSkinStore.hpp=</Transaction>
+    <Transaction>2008/11/13 07:08:37.796.hpp,D:\MyFile\myskin\demo2\CB2009\WinSkinReg.hpp=</Transaction>
+    <Transaction>2008/11/13 18:15:07.241.pas,D:\MyFile\myskin\demo2\CB2009\WinSkinReg.pas=</Transaction>
+    <Transaction>2008/11/13 18:17:17.335.hpp,D:\MyFile\myskin\demo2\CB2009\imgutil.hpp=</Transaction>
+    <Transaction>2008/11/13 18:17:17.335.hpp,D:\MyFile\myskin\demo2\CB2009\SkinRead.hpp=</Transaction>
+    <Transaction>2008/11/13 18:17:19.944.hpp,D:\MyFile\myskin\demo2\CB2009\Winconvert.hpp=</Transaction>
+    <Transaction>2008/11/13 18:17:23.382.hpp,D:\MyFile\myskin\demo2\CB2009\winskindata.hpp=</Transaction>
+    <Transaction>2008/11/13 18:17:25.976.hpp,D:\MyFile\myskin\demo2\CB2009\WinSkinDlg.hpp=</Transaction>
+    <Transaction>2008/11/13 18:17:31.194.hpp,D:\MyFile\myskin\demo2\CB2009\Winskinform.hpp=</Transaction>
+    <Transaction>2008/11/13 18:17:35.163.hpp,D:\MyFile\myskin\demo2\CB2009\WinSkinMenu.hpp=</Transaction>
+    <Transaction>2008/11/13 18:17:38.507.hpp,D:\MyFile\myskin\demo2\CB2009\Winskinini.hpp=</Transaction>
+    <Transaction>2008/11/13 18:17:45.304.hpp,D:\MyFile\myskin\demo2\CB2009\WinSkinStore.hpp=</Transaction>
+    <Transaction>2008/11/13 18:17:47.413.hpp,D:\MyFile\myskin\demo2\CB2009\winsubclass.hpp=</Transaction>
+  </Transactions>
+</BorlandProject>

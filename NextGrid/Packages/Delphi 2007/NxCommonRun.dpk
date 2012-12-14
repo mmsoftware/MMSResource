@@ -1,0 +1,46 @@
+package NxCommonRun;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'BergSoft | NextSuite Common package'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vclx,
+  vcl;
+
+contains
+  NxClasses in '..\..\Sources\NxClasses.pas',
+  NxConsts in '..\..\Sources\NxConsts.pas',
+  NxEdit in '..\..\Sources\NxEdit.pas',
+  NxFlyoutControl in '..\..\Sources\NxFlyoutControl.pas',
+  NxPopupControl in '..\..\Sources\NxPopupControl.pas',
+  NxScrollControl in '..\..\Sources\NxScrollControl.pas',
+  NxSharedCommon in '..\..\Sources\NxSharedCommon.pas',
+  NxSharedDraw in '..\..\Sources\NxSharedDraw.pas',
+  NxStdCtrls in '..\..\Sources\NxStdCtrls.pas',
+  NxThemesSupport in '..\..\Sources\NxThemesSupport.pas',
+  NxVersions in '..\..\Sources\NxVersions.pas';
+
+end.

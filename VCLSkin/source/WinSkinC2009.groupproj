@@ -1,0 +1,36 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{7FADC632-38B2-4A8B-A105-D2D6A209A8D1}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="WinSkinc2009.cbproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="WinSkinc2009">
+			<MSBuild Projects="WinSkinc2009.cbproj"/>
+		</Target>
+		<Target Name="WinSkinc2009:Clean">
+			<MSBuild Targets="Clean" Projects="WinSkinc2009.cbproj"/>
+		</Target>
+		<Target Name="WinSkinc2009:Make">
+			<MSBuild Targets="Make" Projects="WinSkinc2009.cbproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="WinSkinc2009"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="WinSkinc2009:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="WinSkinc2009:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

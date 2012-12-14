@@ -1,0 +1,49 @@
+package NxGridRun;
+
+{$R *.res}
+{$R '..\..\Sources\Next Grid\NxGrid.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'BergSoft | NextGrid component'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  vclx,
+  NxCommonRun;
+
+contains
+  NxCellClasses in '..\..\Sources\Next Grid\NxCellClasses.pas',
+  NxCells in '..\..\Sources\Next Grid\NxCells.pas',
+  NxColumnClasses in '..\..\Sources\Next Grid\NxColumnClasses.pas',
+  NxColumnDragBox in '..\..\Sources\Next Grid\NxColumnDragBox.pas',
+  NxColumns in '..\..\Sources\Next Grid\NxColumns.pas',
+  NxCustomGrid in '..\..\Sources\Next Grid\NxCustomGrid.pas',
+  NxCustomGridControl in '..\..\Sources\Next Grid\NxCustomGridControl.pas',
+  NxDisplays in '..\..\Sources\Next Grid\NxDisplays.pas',
+  NxFieldChooser in '..\..\Sources\Next Grid\NxFieldChooser.pas',
+  NxGrid in '..\..\Sources\Next Grid\NxGrid.pas',
+  NxGridCommon in '..\..\Sources\Next Grid\NxGridCommon.pas',
+  NxVirtualColumn in '..\..\Sources\Next Grid\NxVirtualColumn.pas';
+
+end.
